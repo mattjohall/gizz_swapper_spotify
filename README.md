@@ -18,7 +18,8 @@ A Spotify API key is required per account. Visit https://developer.spotify.com/d
 
 ## Option 1 (Windows) Run the .exe app package.
 This is found in releases -> https://github.com/mattjohall/gizz_swapper_spotify/releases/tag/releases
-Dont want to preview swaps? Just double click the .exe after putting keys in .env file.
+
+Don't want to preview swaps? Just double click the .exe after putting keys in .env file.
 1. Unzip the Release. This contains the .env example and a gizz-swapper.exe
 2. Once in the unzipped folder on File Explorer, click File tab (top left) -> Powershell -> Open Powershell in the folder
 3. run gizz_swapper.exe --simulate to preview swaps (this will open a browser, login to spotify and agree).
