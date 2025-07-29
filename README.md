@@ -11,7 +11,7 @@ NOTE: The band posted on instagram that bootlegging is allowed. To support KGLW,
 A Spotify API key is required per account. Visit https://developer.spotify.com/documentation/web-api/tutorials/getting-started
 1. Log In (in the top right)
 2. Visit the Dashboard (click your profile) and create an app.
-3. Copy your Client API Key to the .env file in the run folder (either the unpacked zip or your python project)
+3. Copy your Client API Key to the .env file in the run folder (either the unpacked zip or your python project). You can open it in Notepad++ or rename to .env.txt, edit it, then rename to .env.
 4. Reveal your client secret. Copy this API key to the same .env.
 5. Copy from here or the .env http://127.0.0.1:8888/callback into Redirect URLs on the Spotify App Webpage and click Add.
 6. Save the Spotify App (at the bottom of the page).
