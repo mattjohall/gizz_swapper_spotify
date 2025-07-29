@@ -10,14 +10,14 @@ import time
 
 load_dotenv()  # Load from .env file
 def parse_args():
-    parser = argparse.ArgumentParser(description="Replace King Gizzard tracks with live bootlegs in your playlists.")
+    parser = argparse.ArgumentParser(description="Replace King Gizzard tracks with live or demos in your playlists.")
     parser.add_argument('--simulate', action='store_true', help='Simulate changes without modifying playlists.')
     return parser.parse_args()
 
 # === CONFIGURATION === #
 TARGET_ARTIST = "King Gizzard & The Lizard Wizard"
-LIVE_KEYWORDS = ["live", "bootleg"]
-FUZZY_MATCH_THRESHOLD = 60
+LIVE_KEYWORDS = ["live", "bootleg", "demo"]
+FUZZY_MATCH_THRESHOLD = 40
 SEARCH_LIMIT = 20
 global SIMULATE
 #SIMULATE = True  # Set True for dry-run mode (no playlist edits)
@@ -87,15 +87,24 @@ def is_strict_match(original, candidate, fuzzy_threshold=85):
     return match_ratio >= 0.8  # stricter than just 1 word
 
 BAD_MATCHES = [
-    ("I’m Not a Man Unless I Have A Woman", "I'm Not in Your Mind (Live at Red Rocks '22)"),
-    ("King Gizzard & the Lizard Wizard W/King Stingray - Treaty (Live in Austin '24)", None),  # Reject any match TO this
+    ("I’m Not a Man Unless I Have A Woman",None),
+    ("Uh Oh I Called Mum",None),
+    ("God Is Calling Me Back Home",None),
+    ("Pop In My Step", None),
+    ("I'm Sleepin' In",None),
+    ("Sketches Of Brunswick East II",None),
+    ("Sketches Of Brunswick East III",None),
+    ("Rolling Stoned",None),
+    ("The Wheel",None),
+    ("Ontology",None),
+    (None,"King Gizzard & the Lizard Wizard W/King Stingray - Treaty (Live in Austin '24)"),  # Reject any match TO this
 ]
 
 def is_bad_match(original, candidate):
     for bad_original, bad_candidate in BAD_MATCHES:
         if original == bad_original and (bad_candidate is None or candidate == bad_candidate):
             return True
-        if bad_candidate is None and candidate == bad_original:  # If we want to reject anything matching a specific track
+        if bad_original is None and candidate == bad_candidate:  # If we want to reject anything matching a specific track
             return True
     return False
 
@@ -188,6 +197,7 @@ def replace_tracks_in_playlist(playlist):
             title = track['name']
             live_version = find_best_live_version(title)
             if is_bad_match(title, live_version):
+                failed.append(title)
                 continue
             if live_version:
                 print(f"--> Swapping '{title}' at position {index} with '{live_version['name']}'")
@@ -212,7 +222,7 @@ def replace_tracks_in_playlist(playlist):
                     print("Simulation mode ON: swap not executed.")
                 swaps.append((title, live_version['name']))
             else:
-                print(f"XX No bootleg match found for '{title}'")
+                print(f"XX No live/demo match found for '{title}'")
                 failed.append(title)
 
     return name, swaps, failed
@@ -266,12 +276,14 @@ def main():
             print("Not Found: None")
 
     print("\nSUMMARY")
+    if SIMULATE:
+        print("NOTE: Ran Simulated, no swaps occured. Hit y after running to swap for real.")
     print(f"Total King Gizzard tracks found: {total_gizz_tracks}")
-    print(f"Total swapped with bootlegs: {total_swapped}")
+    print(f"Total swapped with live/demo: {total_swapped}")
     if total_gizz_tracks > 0:
         percent = (total_swapped / total_gizz_tracks) * 100
         print(f"✅ Match rate: {percent:.2f}%")
-
+    print(f"Enjoy Listening! Keep the Gizz Alive ~>:=||===||==-")
 
 if __name__ == "__main__":
     args = parse_args()
