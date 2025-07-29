@@ -2,6 +2,7 @@
 Here, I have made a tool which you can use with the spotify api to retain some gizz in your life. Note that not all songs have live versions available, so only ~70% of their discography can be swapped. Please Read the option relevant to you below.
 NOTE: The band posted on instagram that bootlegging is allowed. To support KGLW, consider buying their studio recordings here-> https://kinggizzard.bandcamp.com
 
+### Enjoy Listening! Feel Free to chip in a few bucks here https://coff.ee/guitarmattq
 ## Please star this repo if you found the tool helpful!
  If in the event their studio recordings return, I will make a tool which swaps back. Watch this repo for updates!
 - Before you start! Consider transfering your playlists to a service where their music is still available. This will allow you to listen elsewhere to their studio recordings. I used https://soundiiz.com/webapp/playlists
@@ -16,10 +17,11 @@ A Spotify API key is required per account. Visit https://developer.spotify.com/d
 6. Save the Spotify App (at the bottom of the page).
 
 ## Option 1 (Windows) Run the .exe app package.
+Dont want to preview swaps? Just double click the .exe after putting keys in .env file.
 1. Unzip the Release. This contains the .env example and a gizz-swapper.exe
 2. Once in the unzipped folder on File Explorer, click File tab (top left) -> Powershell -> Open Powershell in the folder
-3. run gizz-swapper.exe --simulate to preview swaps (this will open a browser, login to spotify and agree).
-> gizz-swapper.exe
+3. run gizz_swapper.exe --simulate to preview swaps (this will open a browser, login to spotify and agree).
+> gizz_swapper.exe
 
 > Type y ENTER to continue.
 
@@ -30,11 +32,13 @@ Done!
 2.  Open the repo in your python shell. I recommend creating an env before installing requirements.
 3.  Copy Client API key and Secret Key to .env file.
 4.  Once cd into the folder, pip install -r requirements.txt
-> python bootleg_swapper.py --simulate (this will open a browser, login to spotify and agree).
+> python gizz_swapper.py --simulate (this will open a browser, login to spotify and agree).
 
 or
 
-> python bootleg_swapper.py
+> python gizz_swapper.py
 
 > Type y ENTER to continue.
 Done!
+
+Lets keep the Gizz alive and available!
